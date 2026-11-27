@@ -1,0 +1,58 @@
+{
+  "$comment": "Entitlement management: one standard way to request access, with approval, expiry and recurring review built in.",
+  "catalogs": [
+    { "name": "IT Privileged Access", "description": "Eligibility for admin roles (via PIM role groups)", "externallyVisible": false },
+    { "name": "Business Applications", "description": "Finance and operations application access", "externallyVisible": false },
+    { "name": "Partner Collaboration", "description": "Access for external partners (B2B guests)", "externallyVisible": true }
+  ],
+  "packages": [
+    {
+      "name": "Intune Administrator (eligible)",
+      "catalog": "IT Privileged Access",
+      "privileged": true,
+      "resources": [ { "type": "group", "name": "PIM-Role-IntuneAdmin", "role": "Member" } ],
+      "policy": {
+        "requestors": { "type": "specificGroup", "group": "IT-Endpoint-Team" },
+        "approval": { "stages": [ { "approver": "manager" }, { "approver": "group", "group": "PIM-Approvers-Tier1" } ], "timeoutDays": 2 },
+        "expirationDays": 180,
+        "review": { "enabled": true, "frequency": "quarterly", "reviewer": "group", "reviewerGroup": "PIM-Approvers-Tier1", "onNoResponse": "removeAccess" }
+      }
+    },
+    {
+      "name": "Exchange Administrator (eligible)",
+      "catalog": "IT Privileged Access",
+      "privileged": true,
+      "resources": [ { "type": "group", "name": "PIM-Role-ExchangeAdmin", "role": "Member" } ],
+      "policy": {
+        "requestors": { "type": "specificGroup", "group": "IT-Messaging-Team" },
+        "approval": { "stages": [ { "approver": "manager" }, { "approver": "group", "group": "PIM-Approvers-Tier1" } ], "timeoutDays": 2 },
+        "expirationDays": 180,
+        "review": { "enabled": true, "frequency": "quarterly", "reviewer": "group", "reviewerGroup": "PIM-Approvers-Tier1", "onNoResponse": "removeAccess" }
+      }
+    },
+    {
+      "name": "Finance ERP - Accounts Payable",
+      "catalog": "Business Applications",
+      "privileged": false,
+      "resources": [ { "type": "group", "name": "APP-ERP-AP-Users", "role": "Member" } ],
+      "policy": {
+        "requestors": { "type": "allMembers" },
+        "approval": { "stages": [ { "approver": "manager" } ], "timeoutDays": 3 },
+        "expirationDays": 365,
+        "review": { "enabled": true, "frequency": "semiAnnual", "reviewer": "manager", "onNoResponse": "removeAccess" }
+      }
+    },
+    {
+      "name": "Partner - Project Workspace",
+      "catalog": "Partner Collaboration",
+      "privileged": false,
+      "resources": [ { "type": "group", "name": "EXT-Partner-Projects", "role": "Member" } ],
+      "policy": {
+        "requestors": { "type": "allExternal" },
+        "approval": { "stages": [ { "approver": "group", "group": "Partner-Sponsors" } ], "timeoutDays": 3 },
+        "expirationDays": 90,
+        "review": { "enabled": true, "frequency": "monthly", "reviewer": "group", "reviewerGroup": "Partner-Sponsors", "onNoResponse": "removeAccess" }
+      }
+    }
+  ]
+}

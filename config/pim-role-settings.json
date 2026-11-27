@@ -1,0 +1,57 @@
+{
+  "$comment": "PIM activation rules per Entra ID directory role, by tier. Group names are resolved to object IDs at deploy time, so no tenant IDs are stored here.",
+  "breakGlassAccounts": [
+    "bg-admin-01@contoso.example",
+    "bg-admin-02@contoso.example"
+  ],
+  "tiers": {
+    "0": {
+      "description": "Control plane: can take over the tenant",
+      "maxActivationHours": 2,
+      "requireApproval": true,
+      "approverGroup": "PIM-Approvers-Tier0",
+      "requireJustification": true,
+      "requireTicket": true,
+      "authenticationContext": "c1",
+      "requireMfa": false,
+      "eligibilityMaxDays": 180
+    },
+    "1": {
+      "description": "Workload administration: one service or many users",
+      "maxActivationHours": 8,
+      "requireApproval": false,
+      "approverGroup": null,
+      "requireJustification": true,
+      "requireTicket": true,
+      "authenticationContext": null,
+      "requireMfa": true,
+      "eligibilityMaxDays": 365
+    },
+    "2": {
+      "description": "Support and read-only",
+      "maxActivationHours": 8,
+      "requireApproval": false,
+      "approverGroup": null,
+      "requireJustification": true,
+      "requireTicket": false,
+      "authenticationContext": null,
+      "requireMfa": true,
+      "eligibilityMaxDays": 365
+    }
+  },
+  "roles": [
+    { "name": "Global Administrator",                     "templateId": "62e90394-69f5-4237-9190-012177145e10", "tier": 0 },
+    { "name": "Privileged Role Administrator",            "templateId": "e8611ab8-c189-46e8-94e1-60213ab1f814", "tier": 0 },
+    { "name": "Privileged Authentication Administrator",  "templateId": "7be44c8a-adaf-4e2a-84d6-ab2649e08a13", "tier": 0 },
+    { "name": "Conditional Access Administrator",         "templateId": "b1be1c3e-b65d-4f19-8427-f6fa0d97feb9", "tier": 0 },
+    { "name": "Security Administrator",                   "templateId": "194ae4cb-b126-40b2-bd5b-6091b380977d", "tier": 0 },
+    { "name": "Application Administrator",                "templateId": "9b895d92-2cd3-44c7-9d02-a6ac2d5ea5c3", "tier": 1 },
+    { "name": "Exchange Administrator",                   "templateId": "29232cdf-9323-42fd-ade2-1d097af3e4de", "tier": 1 },
+    { "name": "Intune Administrator",                     "templateId": "3a2c62db-5318-420d-8d74-23affee5d9d5", "tier": 1 },
+    { "name": "SharePoint Administrator",                 "templateId": "f28a1f50-f6e7-4571-818b-6a12f2af6b6c", "tier": 1 },
+    { "name": "User Administrator",                       "templateId": "fe930be7-5e62-47db-91af-98c3a49a38b1", "tier": 1 },
+    { "name": "Authentication Administrator",             "templateId": "c4e39bd9-1100-46d3-8c65-fb160da0071f", "tier": 1 },
+    { "name": "Helpdesk Administrator",                   "templateId": "729827e3-9c14-49f7-bb1b-9608f156bbb8", "tier": 2 },
+    { "name": "Global Reader",                            "templateId": "f2ef992c-3afb-46b9-b7cf-a126ee74c451", "tier": 2 }
+  ]
+}

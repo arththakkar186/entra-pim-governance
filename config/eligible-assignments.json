@@ -1,0 +1,18 @@
+{
+  "$comment": "Who is ELIGIBLE (not active) for each role. Principals are role-assignable security groups, so membership changes don't need PIM edits. Group membership itself is governed by access packages.",
+  "assignments": [
+    { "role": "Global Administrator",                    "group": "PIM-Role-GlobalAdmin",        "days": 180 },
+    { "role": "Privileged Role Administrator",           "group": "PIM-Role-PrivRoleAdmin",      "days": 180 },
+    { "role": "Privileged Authentication Administrator", "group": "PIM-Role-PrivAuthAdmin",      "days": 180 },
+    { "role": "Conditional Access Administrator",        "group": "PIM-Role-CAAdmin",            "days": 180 },
+    { "role": "Security Administrator",                  "group": "PIM-Role-SecurityAdmin",      "days": 180 },
+    { "role": "Exchange Administrator",                  "group": "PIM-Role-ExchangeAdmin",      "days": 365 },
+    { "role": "Intune Administrator",                    "group": "PIM-Role-IntuneAdmin",        "days": 365 },
+    { "role": "SharePoint Administrator",                "group": "PIM-Role-SharePointAdmin",    "days": 365 },
+    { "role": "User Administrator",                      "group": "PIM-Role-UserAdmin",          "days": 365 },
+    { "role": "Authentication Administrator",            "group": "PIM-Role-AuthAdmin",          "days": 365 },
+    { "role": "Application Administrator",               "group": "PIM-Role-AppAdmin",           "days": 365 },
+    { "role": "Helpdesk Administrator",                  "group": "PIM-Role-Helpdesk",           "days": 365 },
+    { "role": "Global Reader",                           "group": "PIM-Role-GlobalReader",       "days": 365 }
+  ]
+}

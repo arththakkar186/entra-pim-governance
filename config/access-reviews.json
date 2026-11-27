@@ -1,0 +1,48 @@
+{
+  "$comment": "Recurring access reviews outside access packages: privileged roles, sensitive groups and all guests.",
+  "reviews": [
+    {
+      "name": "Quarterly review - Tier 0 role eligibility",
+      "type": "role",
+      "roles": [ "Global Administrator", "Privileged Role Administrator", "Privileged Authentication Administrator", "Conditional Access Administrator", "Security Administrator" ],
+      "reviewers": { "type": "group", "group": "PIM-Approvers-Tier0" },
+      "frequency": "quarterly",
+      "durationDays": 14,
+      "defaultDecision": "Deny",
+      "autoApply": true,
+      "justificationRequired": true
+    },
+    {
+      "name": "Quarterly review - Tier 1 and 2 role eligibility",
+      "type": "role",
+      "roles": [ "Application Administrator", "Exchange Administrator", "Intune Administrator", "SharePoint Administrator", "User Administrator", "Authentication Administrator", "Helpdesk Administrator", "Global Reader" ],
+      "reviewers": { "type": "group", "group": "PIM-Approvers-Tier1" },
+      "frequency": "quarterly",
+      "durationDays": 14,
+      "defaultDecision": "Deny",
+      "autoApply": true,
+      "justificationRequired": true
+    },
+    {
+      "name": "Quarterly review - Finance application groups",
+      "type": "group",
+      "groups": [ "APP-ERP-AP-Users", "APP-ERP-GL-Posting" ],
+      "reviewers": { "type": "groupOwners" },
+      "frequency": "quarterly",
+      "durationDays": 14,
+      "defaultDecision": "Deny",
+      "autoApply": true,
+      "justificationRequired": true
+    },
+    {
+      "name": "Monthly review - Guest users in Microsoft 365 groups",
+      "type": "guests",
+      "reviewers": { "type": "groupOwners" },
+      "frequency": "monthly",
+      "durationDays": 7,
+      "defaultDecision": "Deny",
+      "autoApply": true,
+      "justificationRequired": true
+    }
+  ]
+}
