@@ -14,13 +14,17 @@ Set-StrictMode -Version Latest
 function Read-GovConfig {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$ConfigPath)
-    $read = { param($name) Get-Content -Raw -Path (Join-Path $ConfigPath $name) | ConvertFrom-Json -AsHashtable }
-    [ordered]@{
-        Pim         = & $read 'pim-role-settings.json'
-        Eligibility = & $read 'eligible-assignments.json'
-        Packages    = & $read 'access-packages.json'
-        Reviews     = & $read 'access-reviews.json'
+    $files = [ordered]@{
+        Pim         = 'pim-role-settings.json'
+        Eligibility = 'eligible-assignments.json'
+        Packages    = 'access-packages.json'
+        Reviews     = 'access-reviews.json'
     }
+    $config = [ordered]@{}
+    foreach ($key in $files.Keys) {
+        $config[$key] = Get-Content -Raw -Path (Join-Path $ConfigPath $files[$key]) | ConvertFrom-Json -AsHashtable
+    }
+    $config
 }
 
 function Test-GovernanceConfig {
